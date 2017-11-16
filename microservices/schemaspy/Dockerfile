@@ -18,4 +18,7 @@ COPY app/init.sh /bin/
 
 RUN chmod a+x /bin/init.sh
 
-CMD ["/bin/init.sh"]
+CMD java -jar schemaSpy.jar -t pgsql -s public -db hasuradb -u admin -p understand-photoengraving-sloughy-dahl -host postgres.hasura -o /usr/share/nginx/html -dp postgresql-jdbc4.jar
+
+CMD nginx -g daemon off; 
+# CMD ["/bin/init.sh"]
