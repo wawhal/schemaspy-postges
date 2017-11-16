@@ -12,6 +12,8 @@ RUN apt-get install -y graphviz
 
 RUN rm -v /etc/nginx/nginx.conf
 
+RUN useradd --no-create-home nginx
+
 COPY app/conf/nginx.conf /etc/nginx
 
 COPY app/init.sh /bin/
