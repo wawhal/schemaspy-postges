@@ -20,6 +20,12 @@ items:
       spec:
         containers:
         - image: hasura/base-git-image:0.7
+          env: 
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: postgres.password
+                  name: hasura-secrets
           imagePullPolicy: IfNotPresent
           name: schemaspy
           ports:
