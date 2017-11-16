@@ -8,6 +8,8 @@ RUN wget http://sourceforge.net/projects/schemaspy/files/schemaspy/SchemaSpy%205
 
 RUN wget https://jdbc.postgresql.org/download/postgresql-9.4-1201.jdbc4.jar -O postgresql-jdbc4.jar
 
+RUN apt-get install -y graphviz
+
 RUN rm -v /etc/nginx/nginx.conf
 
 COPY app/conf/nginx.conf /etc/nginx
@@ -16,8 +18,6 @@ COPY app/init.sh /bin/
 
 RUN chmod a+x /bin/init.sh
 
-RUN apt-get install -y graphviz
-
-EXPOSE 80 8080
+EXPOSE 8080
 
 CMD ["/bin/init.sh"]
