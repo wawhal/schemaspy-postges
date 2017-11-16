@@ -1,6 +1,35 @@
-# base
+# Schemaspy with Hasura
 
-A blank template to be used as a starting point to build projects on Hasura. A "project" is a "gittable" directory in the file system, which captures all the information regarding clusters, services and migrations. It can also be used to keep source code for custom services that you write.
+[Schemaspy](https://http://schemaspy.sourceforge.net/) is a tool that analyzes the metadata of a schema in a database and generates a visual representation of it in a browser-displayable format. It lets you click through the hierarchy of database tables via child and parent table relationships as represented by both HTML links and entity-relationship diagrams. It's also designed to help resolve the obtuse errors that a database sometimes gives related to failures due to constraints.
+
+This is a starter project for Schemaspy with Hasura backend. It comes with an article and author table. You can get this application running by just the three following steps:
+
+- Quickstart the project.
+
+```
+$ hasura quickstart rishi/schemaspy-postgres
+```
+
+- Push the project to your cluster
+
+```
+$ git add && git commit -m "First commit"
+$ git push hasura master
+```
+
+- On success, you can view your schema awesomely at https://schemaspy.clustername.hasura-app.io  
+
+## Getting Schemaspy in your Hasura Project
+
+If you have an existing hasura project, you might want to get schemaspy on your project to view your schema systematically. You can just add an extra microservice called schemaspy from the microservice templates.
+
+```
+$ hasura microservice create schemaspy --template=schemaspy
+$ hasura conf generate-route schemaspy >> conf/routes.yaml
+$ hasura conf generate-conf schemaspy >> conf/ci.yaml
+```
+
+Then commit and push the changes to the cluster. You will have schemaspy for your cluster running at https://schemaspy.cluster-name.hasura-app.io
 
 ## Files and Directories
 
@@ -28,28 +57,8 @@ The project (a.k.a. project directory) has a particular directory structure and 
 │   ├── 1504788327_create_table_userprofile.up.yaml
 │   └── 1504788327_create_table_userprofile.up.sql
 └── microservices 
-    ├── adminer
-    │   └── k8s.yaml
-    └── flask
-        ├── src/
+    └── schemaspy
+        ├── app/
         ├── k8s.yaml
         └── Dockerfile
-```
-
-### `hasura.yaml`
-
-This file contains some metadata about the project, namely a name, description and some keywords. Also contains `platformVersion` which says which Hasura platform version is compatible with this project.
-
-### `clusters.yaml`
-
-Info about the clusters added to this project can be found in this file. Each cluster is defined by it's name allotted by Hasura. While adding the cluster to the project you are prompted to give an alias, which is just hasura by default. The `kubeContext` mentions the name of kubernetes context used to access the cluster, which is also managed by hasura. The `config` key denotes the location of cluster's metadata on the cluster itself. This information is parsed and cluster's metadata is appended while conf is rendered. `data` key is for holding custom variables that you can define.
-
-```yaml
-- name: h34-ambitious93-stg
-  alias: hasura
-  kubeContext: h34-ambitious93-stg
-  config:
-    configmap: controller-conf
-    namespace: hasura
-  data: null  
 ```

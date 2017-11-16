@@ -1,4 +1,4 @@
-description: Blank template for a Hasura project
-keywords: base, getting-started
-name: base
+description: Schemaspy with Hasura.
+keywords: schema, schemaspy, data, migration
+name: schemaspy-hasura
 platformVersion: v0.15.3
