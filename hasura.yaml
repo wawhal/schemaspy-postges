@@ -1,0 +1,4 @@
+description: Schemaspy with Hasura.
+keywords: schema, schemaspy, data, migration
+name: schemaspy-hasura
+platformVersion: v0.15.3
